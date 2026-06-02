@@ -37,6 +37,16 @@ build-docs:
 	hack/generate-docs.sh
 .PHONY: build-docs
 
+# Generate per-directory test catalogs (YAML + Markdown) from Ginkgo test sources.
+#
+# Example:
+#   make generate-test-catalog
+#   make generate-test-catalog CATALOG_OUTPUT=docs/catalog
+CATALOG_OUTPUT ?= test/extended/_catalog
+generate-test-catalog:
+	hack/generate-test-catalog.sh $(CATALOG_OUTPUT)
+.PHONY: generate-test-catalog
+
 openshift-tests: GO_BUILD_PACKAGES :=./cmd/openshift-tests
 openshift-tests: build
 .PHONY: openshift-tests
